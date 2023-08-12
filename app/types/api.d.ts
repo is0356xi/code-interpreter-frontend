@@ -41,6 +41,27 @@ export interface paths {
       };
     };
   };
+  "/api/upload-file": {
+    /** Upload file */
+    post: {
+      requestBody?: {
+        content: {
+          "multipart/form-data": {
+            /** Format: binary */
+            file?: string;
+          };
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          content: {
+            "application/json": components["schemas"]["UploadFileResponse"];
+          };
+        };
+      };
+    };
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -69,6 +90,14 @@ export interface components {
       output?: string;
       /** @description Type of the message */
       message_type?: string;
+    };
+    UploadFileResponse: {
+      /** @description Uploaded file name */
+      file_name?: string;
+      /** @description Uploaded file URL */
+      blob_url?: string;
+      /** @description Financial data */
+      financial_data?: Record<string, never>;
     };
   };
   responses: never;
