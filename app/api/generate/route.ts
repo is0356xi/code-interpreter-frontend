@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify(body)
     })
 
+
     // 実行結果を取得
     const result = await res.json() as GenerateResponse
     

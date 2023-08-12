@@ -31,7 +31,7 @@
     outline: none
 }
 
-form.file-upload button, button.send {
+.FileUpload button, button.send {
     border: 0;
     background: #eee;
     margin: 0.5rem;
@@ -41,11 +41,11 @@ form.file-upload button, button.send {
     height: fit-content;
 }
 
-form.file-upload button {
-    margin-right: 0;
+.FileUpload button {
+    margin-right: 10;
 }
 
-form.file-upload svg, button.send svg {
+.FileUpload svg, button.send svg {
     margin-top: 3px;
     width: 20px;
     height: auto;

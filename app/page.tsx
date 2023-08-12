@@ -108,17 +108,33 @@ export default function Home() {
       // 生成したコードをバックエンドで実行してもらい、結果を取得
       const exec_result = await ExecuteCode({code: code_result.generated_code!})
 
+      console.log(exec_result)
+
+      // message_typeがimage/pngかどうかで分岐
+      const type = exec_result.message_type === "image/png" ? "image/png" : "message";
+
       // バックエンドからのレスポンスを状態に追加する
       addMessage({
         text: exec_result.output!,
         role: "system",
-        type: exec_result.message_type!,
+        type: type,
       });
 
     }catch(e){
       console.error(e)
     }
   }
+
+
+  // ファイルのアップロード完了処理
+  const completeUpload = (file_name: string, data: object) => {
+    addMessage({
+      text: file_name + "をアップロードしました。\n抽出したデータは以下の通りです。\n" + JSON.stringify(data),
+      role: "system",
+      type: "message",
+    })
+  }
+
 
   return (
     <div className={styles.main}>
@@ -128,6 +144,7 @@ export default function Home() {
       />
       <Input 
         onSendMessage={sendMessage}
+        onUploadComplete={completeUpload}
       />
     </div>
   )
